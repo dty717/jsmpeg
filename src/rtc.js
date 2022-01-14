@@ -1,12 +1,12 @@
+
 JSMpeg.Source.RTC = (function () {
 	"use strict";
 
-	var RTCSource = function (rtcSource, options) {
-		this.rtcSource = rtcSource;
+	var RTCSource = function (myPeerConnection, options) {
+		this.myPeerConnection = myPeerConnection;
 		this.options = options;
 		this.socket = null;
 		this.streaming = true;
-
 		this.callbacks = { connect: [], data: [] };
 		this.destination = null;
 
@@ -23,6 +23,26 @@ JSMpeg.Source.RTC = (function () {
 
 		this.onEstablishedCallback = options.onSourceEstablished;
 		this.onCompletedCallback = options.onSourceCompleted; // Never used
+
+		this.myPeerConnection.ondatachannel = ((event) => {
+			receiveChannel = event.channel;
+			receiveChannel.onmessage = this.handleReceiveMessage;
+			receiveChannel.onopen = this.handleReceiveChannelStatusChange;
+			receiveChannel.onclose = this.handleReceiveChannelStatusChange;
+		}).bind(this);
+	};
+	RTCSource.prototype.handleReceiveMessage = function (event) {
+		console.log('handleReceiveMessage',event.data,this.destination.write);
+	};
+	
+	RTCSource.prototype.handleReceiveChannelStatusChange = function (...abc) {
+		console.log(abc);
+		// if (receiveChannel) {
+		// 	console.log("Receive channel's status has changed to " +
+		// 		receiveChannel.readyState);
+		// }	
+		// Here you would do stuff that needs to be done
+		// when the channel's status changes
 	};
 
 	RTCSource.prototype.connect = function (destination) {
