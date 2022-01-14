@@ -8,7 +8,7 @@ var Player = function(url, options) {
 		options.streaming = !!this.source.streaming;
 	}
 	else if (options.rtc !== false) {
-		this.source = new JSMpeg.Source.RTC(options.RTCSource);
+		this.source = new JSMpeg.Source.RTC(options.RTCSource,options);
 		options.streaming = true;
 	}
 	else if (url.match(/^wss?:\/\//)) {
