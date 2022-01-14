@@ -90,6 +90,7 @@ cat \
 	src/ajax-progressive.js \
 	src/websocket.js \
 	src/ts.js \
+	src/rtc.js \
 	src/decoder.js \
 	src/mpeg1.js \
 	src/mpeg1-wasm.js \

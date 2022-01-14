@@ -3,6 +3,7 @@ JSMpeg.Source.RTC = (function () {
 	"use strict";
 
 	var RTCSource = function (myPeerConnection, options) {
+		console.log(myPeerConnection)
 		this.myPeerConnection = myPeerConnection;
 		this.options = options;
 		this.socket = null;
