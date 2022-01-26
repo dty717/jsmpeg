@@ -64,7 +64,7 @@ JSMpeg.Source.RTC = (function () {
 	RTCSource.prototype.destroy = function () {
 		clearTimeout(this.reconnectTimeoutId);
 		this.shouldAttemptReconnect = false;
-		this.socket.close();
+		// this.socket.close();
 	};
 
 	RTCSource.prototype.start = function () {
